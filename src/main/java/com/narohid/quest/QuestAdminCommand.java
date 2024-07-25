@@ -7,14 +7,18 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 public class QuestAdminCommand implements CommandExecutor {
 
-    private static final String PLUGIN_URL = "URL_DE_TU_PLUGIN/quest-latest.jar"; // URL del plugin más reciente
+    private static final String PLUGIN_URL = "https://github.com/TU_USUARIO/TU_REPOSITORIO/releases/latest/download/quest.jar"; // URL del plugin más reciente en GitHub
+    private static final String VERSION_URL = "https://api.github.com/repos/TU_USUARIO/TU_REPOSITORIO/releases/latest"; // URL para obtener la última versión
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -29,6 +33,16 @@ public class QuestAdminCommand implements CommandExecutor {
 
             if (args.length == 1 && args[0].equalsIgnoreCase("update")) {
                 try {
+                    // Obtener la versión más reciente desde GitHub
+                    String latestVersion = getLatestVersion();
+                    String currentVersion = Bukkit.getPluginManager().getPlugin("Quest").getDescription().getVersion();
+
+                    // Comparar la versión actual con la versión más reciente
+                    if (currentVersion.equalsIgnoreCase(latestVersion)) {
+                        player.sendMessage("El plugin ya está en la última versión.");
+                        return true;
+                    }
+
                     // Descargar la nueva versión del plugin
                     File pluginFile = new File(Bukkit.getPluginManager().getPlugin("Quest").getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
                     FileUtils.copyURLToFile(new URL(PLUGIN_URL), pluginFile);
@@ -38,7 +52,7 @@ public class QuestAdminCommand implements CommandExecutor {
                     if (plugin != null) {
                         Bukkit.getPluginManager().disablePlugin(plugin);
                         Bukkit.getPluginManager().enablePlugin(plugin);
-                        player.sendMessage("El plugin Quest ha sido actualizado.");
+                        player.sendMessage("El plugin Quest ha sido actualizado a la versión " + latestVersion + ".");
                     } else {
                         player.sendMessage("No se pudo encontrar el plugin Quest.");
                     }
@@ -53,5 +67,16 @@ public class QuestAdminCommand implements CommandExecutor {
         }
         sender.sendMessage("¡Este comando solo puede ser usado por jugadores!");
         return false;
+    }
+
+    private String getLatestVersion() throws IOException {
+        StringBuilder json = new StringBuilder();
+        try (Scanner scanner = new Scanner(new URL(VERSION_URL).openStream(), StandardCharsets.UTF_8)) {
+            while (scanner.hasNext()) {
+                json.append(scanner.nextLine());
+            }
+        }
+        JSONObject jsonObject = new JSONObject(json.toString());
+        return jsonObject.getString("tag_name");
     }
 }
