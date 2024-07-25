@@ -1,0 +1,25 @@
+name: Quest
+version: 1.0
+main: com.narohid.quest.Quest
+api-version: 1.20
+
+commands:
+  quest:
+    description: Comando principal del plugin Quest.
+    usage: /quest
+    permission: quest.use
+    permission-message: "No tienes permiso para usar este comando."
+
+  questadmin:
+    description: Comando de administración del plugin Quest.
+    usage: /quest:admin
+    permission: quest.admin
+    permission-message: "No tienes permiso para usar este comando."
+
+permissions:
+  quest.use:
+    description: Permiso para usar el comando /quest.
+    default: true
+  quest.admin:
+    description: Permiso para usar los comandos de administración de Quest.
+    default: op
