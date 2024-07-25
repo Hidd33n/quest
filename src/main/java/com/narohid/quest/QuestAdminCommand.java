@@ -17,8 +17,8 @@ import java.util.Scanner;
 
 public class QuestAdminCommand implements CommandExecutor {
 
-    private static final String PLUGIN_URL = "https://github.com/TU_USUARIO/TU_REPOSITORIO/releases/latest/download/quest.jar"; // URL del plugin más reciente en GitHub
-    private static final String VERSION_URL = "https://api.github.com/repos/TU_USUARIO/TU_REPOSITORIO/releases/latest"; // URL para obtener la última versión
+    private static final String PLUGIN_URL = "https://github.com/Hidd33n/quest/tree/main/releases/latest/download/quest.jar"; // URL del plugin más reciente en GitHub
+    private static final String VERSION_URL = "https://github.com/Hidd33n/quest/tree/main/releases/latest"; // URL para obtener la última versión
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

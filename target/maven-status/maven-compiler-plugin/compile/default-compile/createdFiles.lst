@@ -1,5 +1,4 @@
 com/narohid/quest/Quest.class
 com/narohid/quest/QuestEventListener.class
 com/narohid/quest/QuestCommand.class
-com/narohid/App.class
 com/narohid/quest/QuestAdminCommand.class
