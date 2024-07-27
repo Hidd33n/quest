@@ -1,6 +1,15 @@
-icon:
-  material: DIAMOND_SWORD
-  name: "Matar 10 Zombies"
-  lore:
-    - "Completa esta misión para ganar recompensas"
-    - "Objetivo: Matar 10 zombies"
+icon: DIAMOND_SWORD
+name: "&aKill 10 Zombies"
+lore:
+  - "&7Kill 10 zombies to complete this quest."
+  - "&7Reward: 1 Diamond"
+objective:
+  type: KILL
+  target: ZOMBIE
+  amount: 10
+reward:
+  items:
+    - item: DIAMOND
+      amount: 2
+  experience: 0
+repeatable: false

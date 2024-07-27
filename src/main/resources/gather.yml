@@ -1,0 +1,18 @@
+icon: IRON_PICKAXE
+name: "&aGather 20 Iron Ores"
+lore:
+  - "&7Gather 20 iron ores to complete this quest."
+  - "&7Reward: 5 Diamonds"
+  - ""
+  - "&e[Left-Click] to accept"
+  - "&e[Right-Click] to cancel"
+objective:
+  type: GATHER
+  target: IRON_ORE
+  amount: 20
+reward:
+  items:
+    - item: DIAMOND
+      amount: 2
+  experience: 0
+repeatable: true
